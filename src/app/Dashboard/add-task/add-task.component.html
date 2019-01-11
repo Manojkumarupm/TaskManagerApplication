@@ -1,0 +1,77 @@
+<h3 class="text-alert">Add Task</h3>
+<hr>
+<div class="row">
+  <div class="col-xl-12">
+    <ul class="nav nav-pills">
+      <li class="nav-item">
+        <h4><a routerLink="/add-task" routerLinkActive="active">Add Task</a></h4>
+      </li>
+      <li class="nav-item" style="padding-left:20px">
+        <h4><a routerLink="/view-task" class="text-secondary">View Task</a></h4>
+      </li>
+    </ul>
+  </div>
+</div>
+<h6 class="alert alert-danger" *ngIf="!IsformValid">All the below fields are mandatory..!</h6>
+<h6 class="alert alert-success" *ngIf="IsAddedSuccessFully">Task added successfully...</h6>
+<table class="table table-striped" style="background-color:lightcyan;">
+  <tbody>
+    <tr>
+      <td colspan="1">
+        <form #myForm="ngForm" class="well form-horizontal">
+          <fieldset>
+            <div class="form-group">
+              <label class="col-md-4 control-label">Task:</label>
+              <div class="col-md-8 inputGroupContainer">
+                <div class="input-group"><input id="TaskName" [(ngModel)]="Task1" name="TaskName" placeholder="Task Details"
+                    class="form-control" required="true" value="" type="text"></div>
+              </div>
+            </div>
+            <div class="form-group">
+              <label class="col-md-4 control-label">Priority</label>
+              <div class="col-md-8 inputGroupContainer">
+                <div class="input-group">
+                  <label for="rangeval">{{ rangeval.value }}</label>
+                  <input id="Priority" #rangeval [(ngModel)]="Priority" name="Priority" class="form-control-range"
+                    required="true" value="" type="range" min="0" max="60"></div>
+              </div>
+            </div>
+            <div class="form-group">
+              <label class="col-md-4 control-label">Parent Task Id:</label>
+              <div class="col-md-8 inputGroupContainer">
+                <div class="input-group"><input id="ParentTask" [(ngModel)]="ParentId" #ParentTask name="ParentTask"
+                    placeholder="Parent Task Id" class="form-control" required="true" value="" type="number"></div>
+              </div>
+            </div>
+            <div class="form-group">
+              <label class="col-md-4 control-label">Start Date:</label>
+              <div class="col-md-8 inputGroupContainer">
+                <div class="input-group">
+                  <input id="StartDate" name="StartDate" [(ngModel)]="StartDate" class="form-control" required="true"
+                    value="" type="date"></div>
+              </div>
+            </div>
+            <div class="form-group">
+              <label class="col-md-4 control-label">End Date:</label>
+              <div class="col-md-8 inputGroupContainer">
+                <div class="input-group"><input id="EndDate" name="EndDate" [(ngModel)]="EndDate" class="form-control"
+                    required="true" value="" type="date"></div>
+              </div>
+            </div>
+
+            <div style="padding:20px"> 
+              <button class="btn btn-primary" (click)="AddNewTaskInformation(myForm)" type="submit">
+                  <i class="fa fa-floppy-o" aria-hidden="true"></i> Add Task</button>
+               &nbsp; &nbsp;
+               
+               <button class="btn btn-warning" (click)="ResetTaskForm(myForm)" type="button">
+                  <i class="fa fa-undo" aria-hidden="true"></i>  Reset</button>
+            </div>
+            
+          </fieldset>
+        </form>
+      </td>
+
+    </tr>
+  </tbody>
+</table>

@@ -1,0 +1,83 @@
+
+<h3 class="text-alert">View Task</h3>
+<hr>
+<div class="row">
+    
+    <div class="col-xl-12">
+  <ul class="nav nav-pills ">
+    <li class="nav-item">
+      <h4><a routerLink="/add-task" class="text-secondary" >Add Task</a></h4>
+    </li>
+    <li class="nav-item" style="padding-left:20px">
+      <h4><a routerLink="/view-task" routerLinkActive="active" >View Task</a></h4>
+    </li>
+    </ul>
+  </div>
+  
+  </div>
+
+<div class="row">
+    
+  <div class="col-md-6">
+      <label class="control-label">Task:</label>   
+      <div class="input-group"><input id="TaskName" name="TaskName" #TaskName (keyup)="TaskFilter(TaskName.value)" placeholder="Task Details" class="form-control"   type="text"></div>
+  </div>
+  <div class="col-md-6">
+      <label class="control-label">Parent Task:</label>   
+      <div class="input-group"><input id="ParentTaskName" #ParentTaskName (keyup)="ParentTaskFilter(ParentTaskName.value)" name="ParentTaskName" placeholder="Parent Task Details" class="form-control"  value="" type="number"></div>
+  </div>
+</div>
+<br>
+<div class="row">
+    <div class="col-md-3">
+        <label class="control-label">Priority From:</label>   
+        <div class="input-group"><input id="PriorityFrom" name="PriorityFrom" #PriorityFrom (keyup)="PriorityTaskFilter(PriorityFrom.value)" placeholder="Priority From" class="form-control"  value="" type="number"></div>
+    </div>
+    <div class="col-md-3">
+        <label class="control-label">Priority To:</label>   
+        <div class="input-group"><input id="PriorityTo" name="PriorityTo" #PriorityTo (keyup)="PriorityTaskFilter(PriorityTo.value)"  placeholder="Priority To" class="form-control"  value="" type="number"></div>
+    </div>
+    <div class="col-md-3">
+        <label class="control-label">Start Date:</label>   
+        <div class="input-group"><input id="StartDate" name="StartDate" #StartDate (blur)="StartDateTaskFilter(StartDate.value)"  class="form-control"  value="" type="date" ></div>
+    </div>
+    <div class="col-md-3">
+        <label class="control-label">End Date:</label>   
+        <div class="input-group"><input id="EndDate" name="EndDate" #EndDate (blur)="EndDateTaskFilter(EndDate.value)"  class="form-control"  value="" type="date"></div>
+    </div>
+    
+  </div>
+  <br>  
+
+  <table class="table" style="background-color:lightcyan;">
+      <thead>
+          <tr>
+            <th scope="col">Task Id</th>
+            <th scope="col">Task</th>
+            <th scope="col">Parent Task</th>
+            <th scope="col">Priority</th>
+            <th scope="col">Start</th>
+            <th scope="col">End</th>
+            <th></th>     
+            <th></th>
+            <th></th>
+            <th>IsTaskCompleted</th>
+          </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor ="let item of tasks ; trackBy: TrackTask" >         
+              <td>{{item.TaskId}}</td>
+              <td>{{item.TaskDescription}}</td>
+              <td>{{item.ParentID}}</td>
+              <td>{{item.Priority}}</td>
+              <td>{{item.StartDate | date:'MM-dd-yyyy'}}</td>
+              <td>{{item.EndDate | date:'MM-dd-yyyy' }}</td>
+             
+              <td style="padding-left:0;padding-right:0;"><a routerLink="/update-task/{{item.TaskId}}"><button class="btn btn-primary" [disabled]=" (item.IsTaskCompleted=='1')" > <i class="fa fa-edit" aria-hidden="true"></i> Edit</button></a></td> 
+   
+              <td style="padding-left:0;padding-right:0"><button [disabled]=" (item.IsTaskCompleted == '1')" (click)="CompleteTaskFlagchange(item)"  class="btn btn-warning"> <i class="fa fa-hourglass-end" aria-hidden="true" ></i> End Task</button></td>             
+              <td style="padding-left:0;padding-right:0"><button [disabled]=" (item.IsTaskCompleted =='1')" (click)="DeleteTask(item.TaskId)" class="btn btn-danger"><i class="fa fa-trash" aria-hidden="true"></i> Delete</button></td>
+              <td>{{(item.IsTaskCompleted== true)? 'Yes':'No'}}</td>
+            </tr>
+          </tbody>
+        </table>

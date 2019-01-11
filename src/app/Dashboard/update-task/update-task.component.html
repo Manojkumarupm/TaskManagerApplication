@@ -1,0 +1,76 @@
+
+<hr>
+<div class="row">
+  <div class="col-xl-12">
+    <ul class="nav nav-pills">
+      <li class="nav-item">
+        <h4><a routerLink="/add-task" class="text-secondary">Add Task</a></h4>
+      </li>
+      <li class="nav-item" style="padding-left:20px">
+        <h4><a routerLink="/view-task" class="text-secondary">View Task</a></h4>
+      </li>
+    </ul>
+  </div>
+</div>
+<h3 class="text-warning">Update Task</h3>
+<hr>
+<h6 class="alert alert-danger" *ngIf="!IsformValid">All the below fields are mandatory..!</h6>
+  <h6 class="alert alert-success" *ngIf="IsUpdatedSuccessFully">Task updated successfully...</h6>
+ 
+<table class="table table-striped" style="background-color:lightcyan;">
+    <tbody>
+       <tr>
+          <td colspan="1">
+             <form    class="well form-horizontal">
+                <fieldset>
+                     <div class="form-group">
+                           <label class="col-md-4 control-label">Task Id:</label>
+                           <div class="col-md-8 inputGroupContainer">
+                              
+                              <div class="input-group"><input id="TaskId" [(ngModel)]="TaskId"  name="TaskId" readonly class="form-control"  type="text"></div>
+                           </div>
+                        </div>
+                   <div class="form-group">
+                      <label class="col-md-4 control-label">Task:</label>
+                      <div class="col-md-8 inputGroupContainer">
+                         
+                         <div class="input-group"><input id="TaskDescription" [(ngModel)]="TaskDescription"  name="TaskDescription" placeholder="Task Details" class="form-control" required="true" type="text"></div>
+                      </div>
+                   </div>
+                   <div class="form-group">
+                      <label class="col-md-4 control-label">Priority</label>
+                      <div class="col-md-8 inputGroupContainer">
+                         <div class="input-group">
+                            <label for="rangeval">{{ rangeval.value }}</label>
+                            <input id="Priority" #rangeval [(ngModel)]="Priority"   name="Priority"  class="form-control-range" required="true"  type="range" min="0" max="30" ></div>                    
+                      </div>
+                   </div>
+                   <div class="form-group">
+                      <label class="col-md-4 control-label">Parent Task Id:</label>
+                      <div class="col-md-8 inputGroupContainer">
+                        <div class="input-group"><input id="ParentTask" [(ngModel)]="ParentID"  #ParentTask name="ParentTask" placeholder="Parent Task Id" class="form-control" required="true"  type="number"></div>
+                      </div>
+                   </div>
+                   <div class="form-group">
+                      <label class="col-md-4 control-label">Start Date:</label>
+                      <div class="col-md-8 inputGroupContainer">
+                         <div class="input-group">
+                           <input id="StartDate" name="StartDate" [ngModel]="StartDate | date:'yyyy-MM-dd'" (ngModelChange)="StartDate=$event" class="form-control" required="true"  type="date"></div>
+                      </div>
+                   </div>
+                   <div class="form-group">
+                      <label class="col-md-4 control-label">End Date:</label>
+                      <div class="col-md-8 inputGroupContainer">
+                        <div class="input-group"><input id="EndDate" name="EndDate" [ngModel]="EndDate | date:'yyyy-MM-dd'" (ngModelChange)="EndDate=$event"   class="form-control" required="true" type="date"></div>
+                      </div>
+                   </div>
+                                   
+              <div style="padding:20px"> <button class="btn btn-primary" (click)="UpdateTask()" type="submit"> <i class="fa fa-refresh" aria-hidden="true"></i> Update Task</button> &nbsp; &nbsp; <a routerLink="/view-task"><button class="btn btn-info"  type="button">Cancel</button></a> </div>
+                </fieldset>
+             </form>
+          </td>
+         
+       </tr>
+    </tbody>
+ </table>
+ 
